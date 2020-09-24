@@ -1,0 +1,30 @@
+---
+- name: install software
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - ulogd2
+  loop_control:
+    loop_var: item
+
+# ulogd config
+- name: /etc/ulogd.conf log to syslog only, part 1
+  lineinfile:
+    path: /etc/ulogd.conf
+    regexp: '^(|#)stack=.*,emu1:LOGEMU'
+    line: '#stack=log1:NFLOG,base1:BASE,ifi1:IFINDEX,ip2str1:IP2STR,print1:PRINTPKT,emu1:LOGEMU'
+    create: no
+    firstmatch: yes
+  when: ansible_virtualization_type == 'lxc'
+  notify: reload_ulogd2
+- name: /etc/ulogd.conf log to syslog only, part 2
+  blockinfile:
+    path: /etc/ulogd.conf
+    insertafter: '^#stack'
+    marker: '### ansible {mark} FAI'
+    block: 'stack=log1:NFLOG,base1:BASE,ifi1:IFINDEX,ip2str1:IP2STR,print1:PRINTPKT,sys1:SYSLOG'
+    create: no
+  when: ansible_virtualization_type == 'lxc'
+  notify: reload_ulogd2
+

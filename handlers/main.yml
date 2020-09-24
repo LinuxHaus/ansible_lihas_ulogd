@@ -1,0 +1,5 @@
+---
+- name: reload_ulogd2
+  service:
+    name: ulogd2
+    state: restarted
