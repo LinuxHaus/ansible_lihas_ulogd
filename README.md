@@ -15,5 +15,5 @@ Installs and configures ulogd fpr iptables/nftables NFLOG
 ---
 - hosts: '*'
   roles:
-    - lihas-ulogd
+    - lihas_ulogd
 ```
