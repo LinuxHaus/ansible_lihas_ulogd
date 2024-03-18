@@ -1,5 +1,5 @@
 ---
-- name: reload_ulogd2
-  service:
+- name: Reload ulogd2
+  ansible.builtin.service:
     name: ulogd2
     state: restarted

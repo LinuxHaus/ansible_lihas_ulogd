@@ -1,5 +1,6 @@
 ---
-- hosts: localhost
+- name: Run lihas_ulogd
+  hosts: localhost
   remote_user: root
   roles:
     - lihas_ulogd
