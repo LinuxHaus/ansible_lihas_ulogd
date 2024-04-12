@@ -8,7 +8,7 @@
   loop_control:
     loop_var: item
 # ulogd config
-- name: Confogure /etc/ulogd.conf to log to syslog only, part 1
+- name: Configure /etc/ulogd.conf to log to syslog only, part 1
   ansible.builtin.lineinfile:
     path: /etc/ulogd.conf
     regexp: '^(|#)stack=.*,emu1:LOGEMU'
